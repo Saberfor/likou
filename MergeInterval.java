@@ -28,14 +28,10 @@ public class MergeInterval {
     public static int[][] merge(int[][] intervals) {
         Arrays.sort(intervals, Comparator.comparingInt(a -> a[0]));
         List<int[]> re = new ArrayList<>();
-        int max=0;
-        int min=0;
         int[] compare = intervals[0];
         for (int i=1;i<intervals.length;i++){
             if (compare[1]>=intervals[i][0]) {
-                min = Integer.min(compare[0], intervals[i][0]);
-                max = Integer.max(compare[1], intervals[i][1]);
-                compare = new int[]{min, max};
+                compare[1]=Math.max(compare[1],intervals[i][1]);
             } else {
                 re.add(compare);
                 compare=intervals[i];
